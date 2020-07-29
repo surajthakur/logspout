@@ -105,7 +105,7 @@ func (adapter *Adapter) Stream(logstream chan *router.Message) {
 		if m.Data == "" {
 			continue
 		}
-		containername := strings.Trim(m.Container.Name, "/")
+		containername := strings.Trim(m.Container.Name, "/")[0]
 
 		messageStr, err := json.Marshal(Message{
 			Message: m.Data,
