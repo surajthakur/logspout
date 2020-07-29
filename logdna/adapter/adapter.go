@@ -105,12 +105,15 @@ func (adapter *Adapter) Stream(logstream chan *router.Message) {
 		if m.Data == "" {
 			continue
 		}
-		containername := strings.Trim(m.Container.Name, "/")[0]
+		containername := strings.Trim(m.Container.Name, "/")
+		containernameFirstindex := strings.split(containername, "-")[0]
+		fmt.Println(containername)
+		fmt.Println(containernameFirstindex)
 
 		messageStr, err := json.Marshal(Message{
 			Message: m.Data,
 			Container: ContainerInfo{
-				Name: strings.split(containername, "-"),
+				Name: containernameFirstindex,
 				ID:   m.Container.ID,
 				Config: ContainerConfig{
 					Image:    m.Container.Config.Image,
