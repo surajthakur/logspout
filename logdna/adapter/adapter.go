@@ -107,8 +107,10 @@ func (adapter *Adapter) Stream(logstream chan *router.Message) {
 		}
 		containername := strings.Trim(m.Container.Name, "/")
 		containernameFirstindex := strings.split(containername, "-")[0]
-		fmt.Println(containername)
-		fmt.Println(containernameFirstindex)
+		// fmt.Println(containername)
+		// fmt.Println(containernameFirstindex)
+		debug("containername: ", containername)
+		debug("containernameFirstindex: ", containernameFirstindex)
 
 		messageStr, err := json.Marshal(Message{
 			Message: m.Data,
@@ -203,6 +205,7 @@ func (adapter *Adapter) flushBuffer(buffer []Line) {
 	req.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	req.SetBasicAuth(adapter.Config.LogDNAKey, "")
 	resp, err := adapter.HTTPClient.Do(req)
+	debug("req: ", req)
 
 	if err != nil {
 		adapter.Logger.Println(
