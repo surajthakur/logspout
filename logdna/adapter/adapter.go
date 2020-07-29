@@ -136,7 +136,7 @@ func (adapter *Adapter) Stream(logstream chan *router.Message) {
 		} else {
 			adapter.Queue <- Line{
 				Line:      string(messageStr),
-				File:      m.Container.Name,
+				File:      containernameFirstindex,
 				Timestamp: time.Now().Unix(),
 			}
 		}
