@@ -106,11 +106,16 @@ func (adapter *Adapter) Stream(logstream chan *router.Message) {
 			continue
 		}
 		containername := strings.Trim(m.Container.Name, "/")
-		containernameFirstindex := strings.split(containername, "-")[0]
+		containernameList := strings.Split(containername, "-")
+		containernameFirstindex := containernameList[0]
+
 		// fmt.Println(containername)
 		// fmt.Println(containernameFirstindex)
-		debug("containername: ", containername)
-		debug("containernameFirstindex: ", containernameFirstindex)
+		// debug("containername: ", containername)
+		// debug("containernameFirstindex: ", containernameFirstindex)
+		log.Printf("# containername %s \n", containername)
+		log.Printf("# containername %s \n", containernameList)
+		log.Printf("# containername %s \n", containernameFirstindex)
 
 		messageStr, err := json.Marshal(Message{
 			Message: m.Data,
